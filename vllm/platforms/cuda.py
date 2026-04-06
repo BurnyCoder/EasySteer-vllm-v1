@@ -592,7 +592,7 @@ class NvmlCudaPlatform(CudaPlatformBase):
             handle = pynvml.nvmlDeviceGetHandleByIndex(physical_device_id)
             major, minor = pynvml.nvmlDeviceGetCudaComputeCapability(handle)
             return DeviceCapability(major=major, minor=minor)
-        except RuntimeError:
+        except (RuntimeError, pynvml.NVMLError):
             return None
 
     @classmethod
